@@ -25,7 +25,7 @@ class Paint(object):
         self.eraser_button = Button(self.root, text='Eraser', command=self.use_eraser)
         self.eraser_button.grid(row=0, column=3)
 
-        self.choose_size_button = Scale(self.root, from_=1, to=10, orient=HORIZONTAL)
+        self.choose_size_button = Scale(self.root, from_=5, to=30, orient=HORIZONTAL)
         self.choose_size_button.grid(row=0, column=4)
     
 
@@ -94,7 +94,7 @@ class Paint(object):
         self.eraser_on = eraser_mode
 
     def paint(self, event):
-        self.line_width = self.choose_size_button.get()
+        self.line_width = self.choose_size_button.get() * 3
         paint_color = 'white' if self.eraser_on else self.color
         if self.old_x and self.old_y:
             self.c.create_line(self.old_x, self.old_y, event.x, event.y,
