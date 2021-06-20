@@ -22,7 +22,7 @@ def Predict(path):
     im = Image.open(path)
     im = ImageOps.grayscale(im) # .filter(ImageFilter.CONTOUR))
     im = im.resize((28,28))
-    im = im.filter(ImageFilter.EDGE_ENHANCE)
+    im = im.filter(ImageFilter.DETAIL)
     im = np.asarray(im)
     im = im/255
     #plt.imshow(im)
