@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter.colorchooser import askcolor
-from brain import Image, ImageDraw, Predict
+from brain import Image, ImageDraw, Predict, modelfit
 
 class Paint(object):
     DEFAULT_PEN_SIZE = 5.0
@@ -25,7 +25,7 @@ class Paint(object):
         self.eraser_button = Button(self.root, text='Eraser', command=self.use_eraser)
         self.eraser_button.grid(row=0, column=3)
 
-        self.choose_size_button = Scale(self.root, from_=5, to=30, orient=HORIZONTAL)
+        self.choose_size_button = Scale(self.root, from_=15, to=30, orient=HORIZONTAL)
         self.choose_size_button.grid(row=0, column=4)
     
 
@@ -58,10 +58,13 @@ class Paint(object):
 
     def predict(self):
         self.image1.save('just_drawed.jpg')
-        MsgBox = messagebox.askquestion ('Prediction',f"Is that a {Predict('just_drawed.jpg')}?")
+        pred, im = Predict('just_drawed.jpg')
+        MsgBox = messagebox.askquestion ('Prediction',f"Is that a {pred}?")
         if MsgBox == 'yes':
             self.asktoclose('Prediction', 'Great! Want to continue?')
         else:
+            num = int(input("Correct number: "))
+            modelfit(im,  num)
             self.asktoclose('Prediction', 'Sorry. A brain never stops learning\n\nTry again?')
 
     def setup(self):
