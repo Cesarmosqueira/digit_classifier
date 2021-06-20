@@ -1,0 +1,7 @@
+numpy
+tensorflow
+keras
+tkinter
+pillow
+Tk
+
